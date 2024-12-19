@@ -90,6 +90,7 @@ export const Toaster: React.FC<ToasterProps> = ({
   children,
   containerStyle,
   containerClassName,
+  toasterId
 }) => {
   const { toasts, handlers } = useToaster(toastOptions);
 
@@ -110,6 +111,7 @@ export const Toaster: React.FC<ToasterProps> = ({
       onMouseLeave={handlers.endPause}
     >
       {toasts.map((t) => {
+        if (t.toasterId !== toasterId) return;
         const toastPosition = t.position || position;
         const offset = handlers.calculateOffset(t, {
           reverseOrder,
